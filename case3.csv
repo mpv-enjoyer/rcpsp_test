@@ -1,0 +1,9 @@
+job;0;8;1.0;]
+job;1;7;1.0;]
+job;2;2;1.0;]
+job;3;1;1.0;]
+plan;0;0;8;2
+worker;0;0
+worker_group;0;0
+job_group;0;1;30;0;0;1;2;3
+preference;FLS

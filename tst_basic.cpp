@@ -16,6 +16,12 @@ private slots:
     void workerTests();
     void algorithmCase1();
     void algorithmCase2();
+    void algorithmCase3();
+    void algorithmCase4();
+    void algorithmCase5();
+private:
+    void check_loaded(QString file_name, std::vector<int> expected);
+    void compare_result(const std::vector<ResultPair> &completed, std::vector<int> expected);
 };
 
 basic::basic() {}
@@ -58,40 +64,49 @@ void basic::workerTests()
     }
 }
 
-void basic::algorithmCase1()
+void basic::compare_result(const std::vector<ResultPair>& completed, std::vector<int> expected)
+{
+    for (int i = 0; i < expected.size(); i++)
+    {
+        QCOMPARE(completed[i].job_id, expected.size() - i - 1);
+        QCOMPARE(completed[i].start, expected[expected.size() - i - 1]);
+    }
+}
+
+void basic::check_loaded(QString file_name, std::vector<int> expected)
 {
     Algorithm algorithm;
     std::vector<Job*> all_jobs;
     std::vector<Worker*> all_workers;
-    Loader::Load("case1.csv", algorithm, all_workers, all_jobs);
+    Loader::Load("../rcpsp_test/" + file_name, algorithm, all_workers, all_jobs);
     algorithm.run();
     auto completed = algorithm.get_completed();
-    QCOMPARE(completed[0].job_id, 3);
-    QCOMPARE(completed[0].start, 9);
-    QCOMPARE(completed[1].job_id, 2);
-    QCOMPARE(completed[1].start, 0);
-    QCOMPARE(completed[2].job_id, 1);
-    QCOMPARE(completed[2].start, 0);
-    QCOMPARE(completed[3].job_id, 0);
-    QCOMPARE(completed[3].start, 0);
+    compare_result(completed, expected);
+}
+
+void basic::algorithmCase1()
+{
+    check_loaded("case1.csv", {0, 0, 0, 9});
 }
 
 void basic::algorithmCase2()
 {
-    Algorithm algorithm;
-    std::vector<Job*> all_jobs;
-    std::vector<Worker*> all_workers;
-    Loader::Load("case2.csv", algorithm, all_workers, all_jobs);
-    algorithm.run();
-    auto completed = algorithm.get_completed();
-    QCOMPARE(completed[0].job_id, 3);
-    QCOMPARE(completed[0].start, 1);
-    QCOMPARE(completed[1].job_id, 2);
-    QCOMPARE(completed[1].start, 0);
-    QCOMPARE(completed[2].job_id, 1);
-    QCOMPARE(completed[2].start, 0);
-    QCOMPARE(completed[3].job_id, 0);
-    QCOMPARE(completed[3].start, 1);
+    check_loaded("case2.csv", {1, 0, 0, 1});
+}
+
+void basic::algorithmCase3()
+{
+    check_loaded("case3.csv", {10, 1, 20, 22});
+}
+
+void basic::algorithmCase4()
+{
+    check_loaded("case4.csv", {1, 14, 10, 21, 9});
+}
+
+void basic::algorithmCase5()
+{
+    check_loaded("case5.csv", {1, 9, 16, 18});
 }
 
 QTEST_APPLESS_MAIN(basic)
