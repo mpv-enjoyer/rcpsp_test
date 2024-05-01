@@ -19,6 +19,7 @@ private slots:
     void algorithmCase3();
     void algorithmCase4();
     void algorithmCase5();
+    void algorithmCase6();
 private:
     void check_loaded(QString file_name, std::vector<int> expected);
     void compare_result(const std::vector<ResultPair> &completed, std::vector<int> expected);
@@ -78,7 +79,7 @@ void basic::check_loaded(QString file_name, std::vector<int> expected)
     Algorithm algorithm;
     std::vector<Job*> all_jobs;
     std::vector<Worker*> all_workers;
-    Loader::Load("../rcpsp_test/" + file_name, algorithm, all_workers, all_jobs);
+    Loader::Load("../../" + file_name, algorithm, all_workers, all_jobs);
     algorithm.run();
     auto completed = algorithm.get_completed();
     compare_result(completed, expected);
@@ -107,6 +108,11 @@ void basic::algorithmCase4()
 void basic::algorithmCase5()
 {
     check_loaded("case5.csv", {1, 9, 16, 18});
+}
+
+void basic::algorithmCase6()
+{
+    check_loaded("case6.csv", {0, 11, 22, 33});
 }
 
 QTEST_APPLESS_MAIN(basic)
