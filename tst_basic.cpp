@@ -1,7 +1,7 @@
 #include <QtTest>
 
 // add necessary includes here
-#include "../rcpsp_qt/algorithm.h"
+#include "algorithm.h"
 #include "../rcpsp_qt/loader.h"
 
 class basic : public QObject
