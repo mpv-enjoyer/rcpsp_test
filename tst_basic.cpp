@@ -22,8 +22,9 @@ private slots:
     void algorithmCase6();
     void algorithmCase7();
     void algorithmCase8();
+    void weights1();
 private:
-    void check_loaded(QString file_name, std::vector<int> expected);
+    void check_loaded(QString file_name, QString preference_file_name, std::vector<int> expected);
     void compare_result(const std::vector<ResultPair> &completed, std::vector<int> expected);
 };
 
@@ -76,12 +77,13 @@ void basic::compare_result(const std::vector<ResultPair>& completed, std::vector
     }
 }
 
-void basic::check_loaded(QString file_name, std::vector<int> expected)
+void basic::check_loaded(QString file_name, QString preference_file_name, std::vector<int> expected)
 {
     Algorithm algorithm;
     std::vector<Job*> all_jobs;
     std::vector<Worker*> all_workers;
     Loader::Load("../rcpsp_test/" + file_name, algorithm, all_workers, all_jobs);
+    Loader::LoadPreferences("../rcpsp_test/" + preference_file_name, algorithm);
     algorithm.run();
     auto completed = algorithm.get_completed();
     compare_result(completed, expected);
@@ -89,37 +91,37 @@ void basic::check_loaded(QString file_name, std::vector<int> expected)
 
 void basic::algorithmCase1()
 {
-    check_loaded("case1.csv", {0, 0, 0, 9});
+    check_loaded("case1.csv", "preferences1.csv", {0, 0, 0, 9});
 }
 
 void basic::algorithmCase2()
 {
-    check_loaded("case2.csv", {1, 0, 0, 1});
+    check_loaded("case2.csv", "preferences2.csv", {1, 0, 0, 1});
 }
 
 void basic::algorithmCase3()
 {
-    check_loaded("case3.csv", {10, 1, 20, 22});
+    check_loaded("case3.csv", "preferences3.csv", {10, 1, 20, 22});
 }
 
 void basic::algorithmCase4()
 {
-    check_loaded("case4.csv", {1, 14, 10, 21, 9});
+    check_loaded("case4.csv", "preferences4.csv", {1, 14, 10, 21, 9});
 }
 
 void basic::algorithmCase5()
 {
-    check_loaded("case5.csv", {1, 9, 16, 18});
+    check_loaded("case5.csv", "preferences5.csv", {1, 9, 16, 18});
 }
 
 void basic::algorithmCase6()
 {
-    check_loaded("case6.csv", {33, 0, 22, 11});
+    check_loaded("case6.csv", "preferences6.csv", {33, 0, 22, 11});
 }
 
 void basic::algorithmCase7()
 {
-    check_loaded("case7.csv", {5, 3});
+    check_loaded("case7.csv", "preferences7.csv", {5, 3});
 }
 
 void basic::algorithmCase8()
@@ -131,6 +133,11 @@ void basic::algorithmCase8()
     algorithm.run();
     auto completed = algorithm.get_completed();
     QCOMPARE(completed.size(), 4000);
+}
+
+void basic::weights1()
+{
+    Algorithm algorithm;
 }
 
 QTEST_APPLESS_MAIN(basic)
