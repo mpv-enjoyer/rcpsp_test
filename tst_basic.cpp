@@ -84,6 +84,7 @@ void basic::check_loaded(QString file_name, QString preference_file_name, std::v
     std::vector<Worker*> all_workers;
     Loader::Load("../rcpsp_test/" + file_name, algorithm, all_workers, all_jobs);
     Loader::LoadPreferences("../rcpsp_test/" + preference_file_name, algorithm);
+    Loader::LoadWeights("../rcpsp_test/weights.csv", algorithm);
     algorithm.run();
     auto completed = algorithm.get_completed();
     compare_result(completed, expected);
@@ -116,7 +117,7 @@ void basic::algorithmCase5()
 
 void basic::algorithmCase6()
 {
-    check_loaded("case6.csv", "preferences6.csv", {33, 0, 22, 11});
+    check_loaded("case6.csv", "preferences6.csv", {0, 11, 22, 33});
 }
 
 void basic::algorithmCase7()
@@ -137,7 +138,7 @@ void basic::algorithmCase8()
 
 void basic::weights1()
 {
-    Algorithm algorithm;
+
 }
 
 QTEST_APPLESS_MAIN(basic)
