@@ -13,20 +13,20 @@ INCLUDEPATH += ../rcpsp_qt/algorithm
 INCLUDEPATH += ../rcpsp_qt/model
 
 SOURCES +=  tst_basic.cpp \
-    ../rcpsp_qt/algorithm/algorithm.cpp \
-    ../rcpsp_qt/algorithm/assignedjobs.cpp \
-    ../rcpsp_qt/algorithm/completedjobs.cpp \
-    ../rcpsp_qt/algorithm/pendingfronts.cpp \
-    ../rcpsp_qt/algorithm/pendingjobs.cpp \
+    $$files(../rcpsp_qt/algorithm/*.cpp, true) \
+    #../rcpsp_qt/algorithm/assignedjobs.cpp \
+    #../rcpsp_qt/algorithm/completedjobs.cpp \
+    #../rcpsp_qt/algorithm/pendingfronts.cpp \
+    #../rcpsp_qt/algorithm/pendingjobs.cpp \
     ../rcpsp_qt/contentwidget.cpp \
     ../rcpsp_qt/generator.cpp \
-    ../rcpsp_qt/loader.cpp \
+    #../rcpsp_qt/loader.cpp \
     ../rcpsp_qt/mainwindow.cpp \
-    ../rcpsp_qt/model/job.cpp \
-    ../rcpsp_qt/model/jobgroup.cpp \
-    ../rcpsp_qt/model/plan.cpp \
-    ../rcpsp_qt/model/worker.cpp \
-    ../rcpsp_qt/model/workergroup.cpp \
+    $$files(../rcpsp_qt/model/*.cpp, true) \
+    #../rcpsp_qt/model/jobgroup.cpp \
+    #../rcpsp_qt/model/plan.cpp \
+    #../rcpsp_qt/model/worker.cpp \
+    #../rcpsp_qt/model/workergroup.cpp \
     ../rcpsp_qt/plot.cpp \
     ../rcpsp_qt/qcustomplot.cpp \
     ../rcpsp_qt/chartview.cpp \
@@ -47,20 +47,20 @@ DISTFILES += \
 INCLUDEPATH += ../rcpsp_qt
 
 HEADERS += \
-    ../rcpsp_qt/algorithm/algorithm.h \
-    ../rcpsp_qt/algorithm/assignedjobs.h \
-    ../rcpsp_qt/algorithm/completedjobs.h \
-    ../rcpsp_qt/algorithm/pendingfronts.h \
-    ../rcpsp_qt/algorithm/pendingjobs.h \
+    $$files(../rcpsp_qt/algorithm/*.h, true) \
+    #../rcpsp_qt/algorithm/assignedjobs.h \
+    #../rcpsp_qt/algorithm/completedjobs.h \
+    #../rcpsp_qt/algorithm/pendingfronts.h \
+    #../rcpsp_qt/algorithm/pendingjobs.h \
     ../rcpsp_qt/contentwidget.h \
     ../rcpsp_qt/generator.h \
-    ../rcpsp_qt/loader.h \
+    #../rcpsp_qt/loader.h \
     ../rcpsp_qt/mainwindow.h \
-    ../rcpsp_qt/model/job.h \
-    ../rcpsp_qt/model/jobgroup.h \
-    ../rcpsp_qt/model/plan.h \
-    ../rcpsp_qt/model/worker.h \
-    ../rcpsp_qt/model/workergroup.h \
+    $$files(../rcpsp_qt/model/*.h, true) \
+    #../rcpsp_qt/model/jobgroup.h \
+    #../rcpsp_qt/model/plan.h \
+    #../rcpsp_qt/model/worker.h \
+    #../rcpsp_qt/model/workergroup.h \
     ../rcpsp_qt/plot.h \
     ../rcpsp_qt/qcustomplot.h \
     ../rcpsp_qt/chartview.h \
