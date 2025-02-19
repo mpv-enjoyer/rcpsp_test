@@ -156,24 +156,38 @@ private slots:
     }
     void stats()
     {
-        Job job2 = Job(0, 0, {{5, 0.6}, {4, 0.9}});
-        job2.set_start_after(10);
-        job2.set_end_before(35);
+        Job job = Job(0, 0, {{5, 0.6}, {4, 0.9}});
+        job.set_start_after(10);
+        job.set_end_before(35);
         ResultPair r;
-        r.job = &job2;
+        r.job = &job;
         r.job_id = 0;
         r.start = 20;
-        Stats stats({r}, 0.03);
-        qDebug() << "STATS (wait_coeff): \n";
-        for (auto point : stats.wait_coeff)
-        {
-            qDebug() << "X = " << point.first << ", Y = " << point.second << "\n";
-        }
-        qDebug() << "STATS (work_coeff): \n";
-        for (auto point : stats.work_coeff)
-        {
-            qDebug() << "X = " << point.first << ", Y = " << point.second << "\n";
-        }
+
+        Job job2 = Job(0, 0, {{3, 0.6}, {4, 0.9}});
+        job2.set_start_after(10);
+        job2.set_end_before(37);
+        ResultPair r2;
+        r2.job = &job2;
+        r2.job_id = 1;
+        r2.start = 25;
+
+        Stats stats({r, r2}, 0.03);
+        QVERIFY(stats.wait_coeff.at(0.39) == 1);
+        QVERIFY(stats.work_coeff.at(0.36) == 1);
+
+        QVERIFY(stats.wait_coeff.at(0.57) == 1);
+        QVERIFY(stats.work_coeff.at(0.27) == 1);
+        //qDebug() << "STATS (wait_coeff): \n";
+        //for (auto point : stats.wait_coeff)
+        //{
+        //    qDebug() << "X = " << point.first << ", Y = " << point.second << "\n";
+        //}
+        //qDebug() << "STATS (work_coeff): \n";
+        //for (auto point : stats.work_coeff)
+        //{
+        //    qDebug() << "X = " << point.first << ", Y = " << point.second << "\n";
+        //}
     }
 private:
     void check_loaded(QString file_name, QString preference_file_name, std::vector<int> expected);
